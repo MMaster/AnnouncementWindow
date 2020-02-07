@@ -22,11 +22,13 @@ WARNING: If you are upgrading from previous version: you need to remove gui.dat 
 ### Prerequisities
 
 pip install pillow
+
 pip install pyinstaller
 
 ### Build
 
 Run _build.bat from the main directory
+
 Result .exe file will be in dist directory
 
 NOTE: You can also just execute run.py (if you want to get rid of console window rename this file to run.pyw)
