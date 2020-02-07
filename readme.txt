@@ -16,6 +16,31 @@ custom filters!
 
 Finally you can customize your own words to be highlighted with your own colors!
 
+NOTE: This is modification of Announcement Window 1.3.0 beta from https://github.com/BrachystochroneSD/AnnouncementWindow/releases . 
+
+It has the same icon support but includes additional features:
+- 3 window panels
+- filter configuration checkboxes replaced by buttons (solves bug where all checkboxes change when you click at one)
+- incorporates Icons from icon-pack provided in BrachystochroneSDs releases
+
+WARNING: If you are upgrading from previous version: you need to remove gui.dat from Data and add Icons section from icon.cfg to your existing Settings.cfg
+
+
+How to build:
+
+**Prerequisities**
+
+pip install pillow
+pip install pyinstaller
+
+**Build**
+
+Run _build.bat from the main directory
+Result .exe file will be in dist directory
+
+NOTE: You can also just execute run.py (if you want to get rid of console window rename this file to run.pyw)
+
+
 Configuration:
 **Install**
 
