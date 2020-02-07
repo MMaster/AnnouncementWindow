@@ -164,7 +164,7 @@ class main_gui(Tkinter.Tk):
     def __init__(self):
         Tkinter.Tk.__init__(self)
         self.iconbitmap(Config.settings.icon_path)
-        self.title("Announcement Window+")
+        self.title("MM Announcements Window+")
         self.protocol('WM_DELETE_WINDOW', self.clean_exit)
         self.pack_propagate(False)
         self.config(bg="Gray", height=700, width=640)
@@ -176,7 +176,7 @@ class main_gui(Tkinter.Tk):
         self.cpu_max = {}
         self.py = None
         if self.gui_data is None:
-            self.gui_data = {"sash_place":int(700 / 3.236), "font_w0":self.customFont.actual(), "font_w1":self.customFont.actual()}
+            self.gui_data = {"sash_place1":int(700 / 3.236), "sash_place2":int(2*700 / 3.236), "font_w0":self.customFont.actual(), "font_w1":self.customFont.actual(), "font_w2":self.customFont.actual()}
         self.locked = False
         self.init_menu()
         self.init_windows()
@@ -222,12 +222,12 @@ class main_gui(Tkinter.Tk):
     def init_windows(self):
         self.panel = Tkinter.PanedWindow(self, orient="vertical", sashwidth=5)
         self.panel.pack(fill="both", expand=1)
-        for i in range(0, 2):
+        for i in range(0, 3):
             self.announcement_windows[i] = announcement_window(self, i)
-        self.panel.add(self.announcement_windows[0])
-        self.panel.add(self.announcement_windows[1])
+            self.panel.add(self.announcement_windows[i])
         self.panel.update_idletasks()
-        self.panel.sash_place(0, 0, self.gui_data["sash_place"])  # TODO: update to support multiple sashes
+        self.panel.sash_place(0, 0, self.gui_data["sash_place1"])  # TODO: update to support multiple sashes
+        self.panel.sash_place(1, 0, self.gui_data["sash_place2"])  # TODO: update to support multiple sashes
 
     def gen_tags(self):
         Filters.expressions.reload()
@@ -237,7 +237,8 @@ class main_gui(Tkinter.Tk):
             announcement_win[1].config(state="disabled")
 
     def clean_exit(self):
-        self.gui_data["sash_place"] = self.panel.sash_coord(0)[1]
+        self.gui_data["sash_place1"] = self.panel.sash_coord(0)[1]
+        self.gui_data["sash_place2"] = self.panel.sash_coord(1)[1]
         Config.settings.save_gui_data(self.gui_data)
         self.destroy()
 

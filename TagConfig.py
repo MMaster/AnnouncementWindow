@@ -76,11 +76,11 @@ class CategoryBar(Tkinter.Frame):
         for show_ in self.category.show.items():
             window = show_[0]
             show = show_[1]
-            cbutton = Tkinter.Checkbutton(frame, background="gray")
-            if show:
-                cbutton.select()
+            cbutton = Tkinter.Button(frame, background="gray", text="N", width=2)
             cbutton.config(command=partial(self.set_show, window, show, cbutton))
             cbutton.grid(row=0, column=col_)
+            if show:
+                cbutton.config(text="Y", background="green")
             col_ += 1
         frame.grid(row=0, column=1, sticky="w")
 
@@ -93,6 +93,11 @@ class CategoryBar(Tkinter.Frame):
 
     def set_show(self, window, currentVal, button):
         self.category.show[window] = not self.category.show[window]
+        if self.category.show[window]:
+            button.config(text="Y", background="green")
+        else:
+            button.config(text="N", background="gray")
+        print('Category: %s Window: %d Show: %d' % (str(self.category), window, self.category.show[window]))
 
     def expand(self):
         if not self.is_grid:
@@ -142,7 +147,7 @@ class GroupBar(Tkinter.Frame):
             for show_ in category.show.items():
                 window = show_[0]
                 show = show_[1]
-                win_frame = Tkinter.Frame(frame, width=28, height=21)
+                win_frame = Tkinter.Frame(frame, width=24, height=21)
                 win_frame.pack_propagate(0)
                 win = Tkinter.Label(win_frame, text=str(window).rjust(3), anchor="w", background="gray")
                 win.pack(fill="both", expand=True)
@@ -294,7 +299,7 @@ if __name__ == '__main__':
         MainDialog(root)
 
     # I need to call these or color&visibility data will not be loaded:
-    for i in range(0, 8):
+    for i in range(0, 3):
         Filters.expressions.add_window(i)
 
     Filters.expressions.reload()
