@@ -59,7 +59,7 @@ class config(object):
         self.showgroups = False
         self.load_previous_announcements = False
         self.save_hidden_announcements = False
-        self.trim_announcements = [0, 0]
+        self.trim_announcements = [0, 0, 0]
         self.default_bg="#000000"
         self.word_color_dict={"white":["#FFFFFF","#000000"],"silver":["#C0C0C0","#000000"],"gray":["#808080","#000000"],"black":["#000000","#000000"],"red":["#FF0000","#000000"],"maroon":["#800000","#000000"],"yellow":["#FFFF00","#000000"],"olive":["#808000","#000000"],"lime":["#00FF00","#000000"],"green":["#008000","#000000"],"aqua":["#00FFFF","#000000"],"teal":["#008080","#000000"],"blue":["#0000FF","#000000"],"navy":["#000080","#000000"],"fuchsia":["#FF00FF","#000000"],"purple":["#800080","#000000"]}
 
@@ -71,6 +71,7 @@ class config(object):
             self.parser.set("Settings", 'load_previous_announcements', str(self.load_previous_announcements))
             self.parser.set("Settings", 'trim_announcements_0', str(self.trim_announcements[0]))
             self.parser.set("Settings", 'trim_announcements_1', str(self.trim_announcements[1]))
+            self.parser.set("Settings", 'trim_announcements_2', str(self.trim_announcements[2]))
             self.parser.add_section("Colors")
             self.parser.set("Colors", 'default_background', str(self.default_bg))
             for color in self.word_color_dict:
@@ -83,6 +84,7 @@ class config(object):
             self.load_previous_announcements = self.parser.getboolean("Settings", 'load_previous_announcements')
             self.trim_announcements[0] = self.parser.getint("Settings", 'trim_announcements_0')
             self.trim_announcements[1] = self.parser.getint("Settings", 'trim_announcements_1')
+            self.trim_announcements[2] = self.parser.getint("Settings", 'trim_announcements_2')
             self.word_color_dict={}
             self.default_bg = self.parser.get("Colors", 'default_background')
             for (color_name,color_value) in self.parser.items("Colors"):
